@@ -125,10 +125,11 @@ if st.button("Prediksi Suhu"):
 # ===============================
 # PENJELASAN AI
 # ===============================
-st.subheader("🤖 Created by Zee?")
+st.subheader("🤖 Created by Zee")
 st.markdown("""
 - Menggunakan **Machine Learning (Regresi)**
 - Model belajar dari **Data Iklim**
 """)
+
 
 
