@@ -46,18 +46,37 @@ df = generate_weather_data()
 # ===============================
 # EDA
 # ===============================
-st.subheader("📊 Statistik Data Iklim")
-st.write(df.describe())
+st.subheader("📈 Tren Suhu Udara (Visualisasi Lebih Jelas)")
 
-st.subheader("📈 Grafik Perubahan Suhu dari Waktu ke Waktu")
-sample_df = df.sample(500)
+# Urutkan berdasarkan waktu
+df_sorted = df.sort_values("Hari_ke")
 
-fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot(sample_df["Hari_ke"], sample_df["Suhu"])
+# Moving average biar halus (30 hari)
+df_sorted["Suhu_MA"] = df_sorted["Suhu"].rolling(window=30).mean()
+
+fig, ax = plt.subplots(figsize=(11, 5))
+
+ax.plot(
+    df_sorted["Hari_ke"],
+    df_sorted["Suhu"],
+    alpha=0.15,
+    label="Data Harian"
+)
+
+ax.plot(
+    df_sorted["Hari_ke"],
+    df_sorted["Suhu_MA"],
+    linewidth=3,
+    label="Rata-rata Bergerak (30 hari)"
+)
+
 ax.set_xlabel("Hari")
 ax.set_ylabel("Suhu (°C)")
-ax.set_title("Tren Suhu Udara")
+ax.set_title("Tren Suhu Udara Jangka Panjang")
+ax.legend()
+
 st.pyplot(fig)
+
 
 # ===============================
 # TRAIN MODEL (AI)
@@ -113,3 +132,4 @@ st.markdown("""
 - Tidak menggunakan rumus manual
 - Model menemukan pola hubungan cuaca secara otomatis
 """)
+
