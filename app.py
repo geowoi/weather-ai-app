@@ -128,8 +128,9 @@ if st.button("Prediksi Suhu"):
 st.subheader("🤖 Created by Zee")
 st.markdown("""
 - Menggunakan **Machine Learning (Regresi)**
-- Prediksi Data Iklim**
+- Prediksi Data Iklim
 """)
+
 
 
 
